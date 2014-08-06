@@ -1,0 +1,43 @@
+{
+    "name": "nCService",
+    "description": "Javascript server to run jobs in the JCService backend",
+    "version": "0.0.1",
+    "main": "./nCService.js",
+    "author": {
+        "name": "Roberto Vera Alvarez",
+        "email": "r78v10a07@gmail.com"
+    },
+    "keywords": [],
+    "licenses": {
+        "type": "gpl30"
+    },
+    "repository": {
+        "type": "svn",
+        "url": "http://net.icgeb.org/"
+    },
+    "bugs": {
+        "url": "http://net.icgeb.org/"
+    },
+    "dependencies": {
+        "express": ">=4.7.2",
+        "routes": ">=1.2.0",
+        "http": ">=0.0.0",
+        "url": ">=0.10.1",
+        "path": ">=0.4.9",
+        "mysql": ">=2.4.1",
+        "express-myconnection": ">=1.0.4",
+        "logger": ">=0.0.1",
+        "process": ">=0.7.0",
+        "json": ">=9.0.1",
+        "error": ">=4.1.1",
+        "ejs": ">=1.0.0",
+        "morgan": ">=1.2.2",
+        "st": ">=0.5.1",
+        "connect": ">=3.1.0",
+        "errorhandler": ">=1.1.1",
+        "exec": ">=0.1.1",
+        "filesystem": ">=1.0.1",
+        "stream": ">=0.0.1",
+        "readline": ">=0.0.3"
+    }
+}

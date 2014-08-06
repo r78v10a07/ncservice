@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>nCService Backend</title>
+        <link rel="stylesheet" type="text/css" href="public/css/layout.css" /> 
+        <link rel="stylesheet" type="text/css" href="public/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="public/css/colors.css" />
+    </head>
+    <body>
+        <div id="page-wrapper">
+            <div id="page">
+                <div id="header" class="with-secondary-menu">
+                    <div class="section clearfix">
+                        <div id="main-title">
+                            <div>
+                                <hgroup>
+                                    <h1 class="main-title"><%- title%></h1>
+                                </hgroup>
+                            </div>
+                        </div>
+
+                        <div id="main-menuxx" class="navigationxx" style="text-align: right;">
+                            <br><br>
+                        </div>
+                    </div>
+                </div>
+                <div id="messages">
+                    <div class="section clearfix">
+                    </div>
+                </div>
+                <div id="main-wrapper" class="clearfix">
+                    <div id="main" class="clearfix">
+                        <div id="sidebar-first" class="column sidebar">
+                            <div class="section">
+                                <div class="region region-sidebar-first">
+                                    <div id="block-system-navigation" class="block block-system block-menu">
+                                        <h2>Navigation</h2>
+                                        <ul class="menu clearfix">                        
+                                            <li class="leaf"><a href="/">Home</a></li> 
+                                            <li class="leaf"><a href="/exec?id=1&arg=/tmp">Exec ls on /tmp</a></li>
+                                            <li class="leaf"><a href="/exec?id=3&arg=-v%20/tmp/aaa">Create folder aaa in /tmp</a></li>
+                                            <li class="leaf"><a href="/exec?id=4&arg=-rfv%20/tmp/aaa">Remove folder aaa in /tmp</a></li>
+                                        </ul> 
+                                    </div>
+                                </div>
+                                <img src="img/logo.gif" alt="" width="150" height="150">
+                                <br>
+                                <br>
+                            </div>
+                        </div> 
+                        <div id="content" class="column">
+                            <div class="section">
+                                <a id="main-content"></a>
+                                
