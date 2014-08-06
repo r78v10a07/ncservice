@@ -1,0 +1,24 @@
+<%- include layouts/header.ejs %>
+
+<table>
+    <tr>
+        <th width="50px">Id</th>
+        <th>Name</th>
+        <th>Script</th>
+        <th>Comment</th>
+        <th>Arg</th>
+    </tr>                 
+    <tr>
+        <td><%- data[0].Id%></td>
+        <td><%- data[0].Name%></td>
+        <td><%- data[0].Script%></td>
+        <td><%- data[0].Comment%></td>
+        <td><%- arg%></td>
+    </tr>
+</table>
+<br>
+<pre>
+<%- stdout%>
+</pre>
+
+<%- include layouts/footer.ejs %>
