@@ -1,18 +1,25 @@
 
+var config = require('../config/config');
+
 /*
  * GET programs
  */
 
 exports.list = function(req, res) {
+    if (config.mysql.enable === 'true') {
+        req.getConnection(function(err, connection) {
+            var query = connection.query('SELECT * FROM Progs', function(err, rows) {
+                if (err)
+                    console.log("Error Selecting : %s ", err);
 
-    req.getConnection(function(err, connection) {
-        var query = connection.query('SELECT * FROM Progs', function(err, rows) {
-            if (err)
-                console.log("Error Selecting : %s ", err);
-
-            res.render('list', {title: "nCService Backend", data: rows});
+                res.render('list', {title: "nCService Backend", data: rows});
+            });
         });
-    });
+    } else if (config.progs.enable === 'true') {
+        res.render('list', {title: "nCService Backend", data: config.progs.list});
+    } else {
+        res.render('error', {title: "nCService Backend Error!!", error: "In config file: config.mysql or config.progs should be enable"});
+    }
 };
 
 /*
@@ -21,15 +28,20 @@ exports.list = function(req, res) {
 
 exports.get = function(req, res) {
     var id = req.params.id;
+    if (config.mysql.enable === 'true') {
+        req.getConnection(function(err, connection) {
+            var query = connection.query('SELECT * FROM Progs WHERE Id = ?', id, function(err, rows) {
+                if (err)
+                    console.log("Error Selecting : %s ", err);
 
-    req.getConnection(function(err, connection) {
-        var query = connection.query('SELECT * FROM Progs WHERE Id = ?', id, function(err, rows) {
-            if (err)
-                console.log("Error Selecting : %s ", err);
-
-            res.render('list', {title: "nCService Backend", data: rows});
+                res.render('prog', {title: "nCService Backend", data: rows[0]});
+            });
         });
-    });
+    } else if (config.progs.enable === 'true') {
+        res.render('prog', {title: "nCService Backend", data: config.progs.list[id]});
+    } else {
+        res.render('error', {title: "nCService Backend Error!!", error: "In config file: config.mysql or config.progs should be enable"});
+    }
 };
 
 /*
@@ -44,31 +56,54 @@ exports.exec = function(req, res) {
     var text = req.param("text");
 
     if (id && arg) {
-        req.getConnection(function(err, connection) {
-            var query = connection.query('SELECT * FROM Progs WHERE Id = ?', id, function(err, rows) {
-                if (err)
-                    console.log("Error Selecting : %s ", err);
+        if (config.mysql.enable === 'true') {
+            req.getConnection(function(err, connection) {
+                var query = connection.query('SELECT * FROM Progs WHERE Id = ?', id, function(err, rows) {
+                    if (err)
+                        console.log("Error Selecting : %s ", err);
 
-                if (text === "true") {
-                    res.writeHead(200, {'Content-Type': 'text/plain'});
-                }
+                    if (text === "true") {
+                        res.writeHead(200, {'Content-Type': 'text/plain'});
+                    }
 
-                var child = exec(rows[0].Script + " " + arg, function(error, stdout, stderr) {
-                    if (async !== "true") {
-                        if (text === "true") {
-                            res.end(stdout);
-                        } else {
-                            res.render('progs', {title: "nCService Backend", data: rows, arg: arg, stdout: stdout});
+                    var child = exec(rows[0].Script + " " + arg, function(error, stdout, stderr) {
+                        if (async !== "true") {
+                            if (text === "true") {
+                                res.end(stdout);
+                            } else {
+                                res.render('exec', {title: "nCService Backend", data: rows[0], arg: arg, stdout: stdout});
+                            }
+                        }
+                    });
+                    if (async === "true") {
+                        if (text !== "true") {
+                            res.render('exec', {title: "nCService Backend", data: rows[0], arg: arg, stdout: "Command " + rows[0].Name});
                         }
                     }
                 });
-                if (async === "true") {
-                    if (text !== "true") {
-                        res.render('progs', {title: "nCService Backend", data: rows, arg: arg, stdout: chroot + "/" + arg});
+            });
+        } else if (config.progs.enable === 'true') {
+            if (text === "true") {
+                res.writeHead(200, {'Content-Type': 'text/plain'});
+            }
+
+            var child = exec(config.progs.list[id].Script + " " + arg, function(error, stdout, stderr) {
+                if (async !== "true") {
+                    if (text === "true") {
+                        res.end(stdout);
+                    } else {
+                        res.render('exec', {title: "nCService Backend", data: config.progs.list[id], arg: arg, stdout: stdout});
                     }
                 }
             });
-        });
+            if (async === "true") {
+                if (text !== "true") {
+                    res.render('exec', {title: "nCService Backend", data: config.progs.list[id], arg: arg, stdout: "Command " + config.progs.list[id].Name});
+                }
+            }
+        } else {
+            res.render('error', {title: "nCService Backend Error!!", error: "In config file: config.mysql or config.progs should be enable"});
+        }
     } else {
         res.render('error', {title: "nCService Backend Error!!", error: "Pass by GET id and dir name (?id=1&arg=abrj)"});
     }
