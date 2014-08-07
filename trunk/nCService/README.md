@@ -50,12 +50,12 @@ Create a database named 'nCService' and a mysql user named 'ncservice'
 mysql> CREATE DATABASE nCService;
 mysql> CREATE USER 'ncservice'@'localhost' IDENTIFIED BY 'mypass';
 mysql> GRANT ALL ON nCService.* TO 'ncservice'@'localhost' IDENTIFIED BY 'mypass';
+#> mysql -p -u ncservice nCService < ./mysql/nCService.sql
 
 RUN
 
 Run this command to execute the application:
 
-#> mysql -p -u ncservice nCService < ./mysql/nCService.sql 
 #> node nCService.js
 Express nCService server listening on port 8081
 
