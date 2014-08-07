@@ -6,6 +6,8 @@ execute programs in the server via URL. This is a kind of webservice developed
 in javascript that uses a configuration file or a MySQL database with the 
 programs to be executed.
 
+The MySQL is disable by default.
+
 The file in ./config/config.js is used to setup all the configurations. 
 
 The default page ("/") shows the list of programs available.
