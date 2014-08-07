@@ -7,6 +7,7 @@ var path = require('path');
 var morgan = require('morgan');
 var st = require('st');
 var errorhandler = require('errorhandler');
+var process = require('process');
 
 //load customers route
 var progs = require('./routes/progs');
@@ -28,15 +29,23 @@ if ('development' === app.get('env')) {
     app.use(errorhandler());
 }
 
-app.use(
-        connection(mysql, {
-            host: config.mysql.host,
-            user: config.mysql.user,
-            password: config.mysql.password,
-            port: config.mysql.port,
-            database: config.mysql.database
-        }, 'request')
-        );
+if (config.mysql.enable === 'true') {
+    console.log('Creating the MySQl connection');
+    app.use(
+            connection(mysql, {
+                host: config.mysql.host,
+                user: config.mysql.user,
+                password: config.mysql.password,
+                port: config.mysql.port,
+                database: config.mysql.database
+            }, 'request')
+            );
+}else{
+    if (config.progs.enable !== 'true'){
+        console.log('Error!! mysql or progs have to be enable in the config.js file');
+        process.exit(1);
+    }
+}
 
 app.get('/', progs.list);
 app.get('/prog/:id', progs.get);

@@ -38,6 +38,7 @@
         "exec": ">=0.1.1",
         "filesystem": ">=1.0.1",
         "stream": ">=0.0.1",
-        "readline": ">=0.0.3"
+        "readline": ">=0.0.3",
+        "process": ">=0.7.0"
     }
 }

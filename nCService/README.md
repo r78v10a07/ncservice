@@ -3,8 +3,8 @@ nCService
 
 This is a simple NodeJS based application that allows external applications 
 execute programs in the server via URL. This is a kind of webservice developed 
-in javascript that uses a MySQL database with the programs available to be 
-executed.
+in javascript that uses a configuration file or a MySQL database with the 
+programs to be executed.
 
 The file in ./config/config.js is used to setup all the configurations. 
 
@@ -39,21 +39,22 @@ NodeJS:
 
 Run this command to download the nodejs modules.
 
->npm install 
+#> npm install 
 
-MySQL:
+MySQL (Optional):
 Create a database named 'nCService' and a mysql user named 'ncservice'
 
->mysql -p -u root
+#> mysql -p -u root
 mysql> CREATE DATABASE nCService;
 mysql> CREATE USER 'ncservice'@'localhost' IDENTIFIED BY 'mypass';
-mysql> GRANT ALL ON ncservice.* TO 'ncservice'@'localhost';
+mysql> GRANT ALL ON nCService.* TO 'ncservice'@'localhost' IDENTIFIED BY 'mypass';
 
 RUN
 
 Run this command to execute the application:
 
->node nCService.js
+#> mysql -p -u ncservice nCService < ./mysql/nCService.sql 
+#> node nCService.js
 Express nCService server listening on port 8081
 
 CREDITS:
