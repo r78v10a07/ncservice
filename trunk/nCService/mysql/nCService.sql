@@ -37,7 +37,7 @@ CREATE TABLE `Progs` (
 
 LOCK TABLES `Progs` WRITE;
 /*!40000 ALTER TABLE `Progs` DISABLE KEYS */;
-INSERT INTO `Progs` VALUES (1,'ls','ls -lh','Run ls command'),(2,'pwd','pwd','Run pwd command'),(3,'mkdir','mkdir -pv','Create a directory'),(4,'rm','rm -rfv ','Remove a directory'),(5,'cat','cat','Cat comand');
+INSERT INTO `Progs` VALUES (0,'ls','/usr/bin/ls','Run ls command'),(1,'pwd','/usr/bin/pwd','Run pwd command'),(2,'mkdir','/usr/bin/mkdir','Run mkdir command'),(3,'rm','/usr/bin/rm','Run rm command'),(4,'cat','/usr/bin/cat','Run cat comand');
 /*!40000 ALTER TABLE `Progs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-06 21:39:02
+-- Dump completed on 2014-08-07 12:33:38
