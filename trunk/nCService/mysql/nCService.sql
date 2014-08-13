@@ -37,7 +37,7 @@ CREATE TABLE `Progs` (
 
 LOCK TABLES `Progs` WRITE;
 /*!40000 ALTER TABLE `Progs` DISABLE KEYS */;
-INSERT INTO `Progs` VALUES (0,'ls','/usr/bin/ls','Run ls command'),(1,'pwd','/usr/bin/pwd','Run pwd command'),(2,'mkdir','/usr/bin/mkdir','Run mkdir command'),(3,'rm','/usr/bin/rm','Run rm command'),(4,'cat','/usr/bin/cat','Run cat comand');
+INSERT INTO `Progs` VALUES (0,'ls','ls','Run ls command'),(1,'pwd','pwd','Run pwd command'),(2,'mkdir','mkdir','Run mkdir command'),(3,'rm','rm','Run rm command'),(4,'cat','cat','Run cat comand'),(5,'ps','ps','Run ps comand');
 /*!40000 ALTER TABLE `Progs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
