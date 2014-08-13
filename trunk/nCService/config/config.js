@@ -36,7 +36,7 @@ config.progs.list = new Array();
 config.progs.list[0] = {};
 config.progs.list[0].Id = 0;
 config.progs.list[0].Name = 'ls';
-config.progs.list[0].Script = '/usr/bin/ls';
+config.progs.list[0].Script = 'ls';     // Full path for programs which are not in the global PATH
 config.progs.list[0].Comment = 'Run ls command';
 
 /*
@@ -45,7 +45,7 @@ config.progs.list[0].Comment = 'Run ls command';
 config.progs.list[1] = {};
 config.progs.list[1].Id = 1;
 config.progs.list[1].Name = 'pwd';
-config.progs.list[1].Script = '/usr/bin/pwd';
+config.progs.list[1].Script = 'pwd';
 config.progs.list[1].Comment = 'Run pwd command';
 
 /*
@@ -54,7 +54,7 @@ config.progs.list[1].Comment = 'Run pwd command';
 config.progs.list[2] = {};
 config.progs.list[2].Id = 2;
 config.progs.list[2].Name = 'mkdir';
-config.progs.list[2].Script = '/usr/bin/mkdir';
+config.progs.list[2].Script = 'mkdir';
 config.progs.list[2].Comment = 'Run mkdir command';
 
 /*
@@ -63,7 +63,7 @@ config.progs.list[2].Comment = 'Run mkdir command';
 config.progs.list[3] = {};
 config.progs.list[3].Id = 3;
 config.progs.list[3].Name = 'rm';
-config.progs.list[3].Script = '/usr/bin/rm';
+config.progs.list[3].Script = 'rm';
 config.progs.list[3].Comment = 'Run rm command';
 
 /*
@@ -72,8 +72,17 @@ config.progs.list[3].Comment = 'Run rm command';
 config.progs.list[4] = {};
 config.progs.list[4].Id = 4;
 config.progs.list[4].Name = 'cat';
-config.progs.list[4].Script = '/usr/bin/cat';
+config.progs.list[4].Script = 'cat';
 config.progs.list[4].Comment = 'Run cat command';
+
+/*
+ * ps
+ */
+config.progs.list[5] = {};
+config.progs.list[5].Id = 5;
+config.progs.list[5].Name = 'ps';
+config.progs.list[5].Script = 'ps';
+config.progs.list[5].Comment = 'Run ps command';
 
 
 
