@@ -78,13 +78,13 @@ exports.exec = function(req, res) {
                             if (text === "true") {
                                 res.end(stdout);
                             } else {
-                                res.render('exec', {title: "nCService Backend", reload: reload, data: rows[0], arg: arg, stdout: stdout});
+                                res.render('exec', {title: "nCService Backend", reload: reload, data: rows[0], arg: arg, stdout: stdout, stderr: error});
                             }
                         }
                     });
                     if (async === "true") {
-                        if (text !== "true") {
-                            res.render('exec', {title: "nCService Backend", reload: reload, data: rows[0], arg: arg, stdout: "Command " + rows[0].Name});
+                        if (text !== "true") {                            
+                            res.render('exec', {title: "nCService Backend", reload: reload, data: rows[0], arg: arg, stdout: "Command " + rows[0].Name, stderr: ""});
                         }
                     }
                 });
@@ -99,13 +99,13 @@ exports.exec = function(req, res) {
                     if (text === "true") {
                         res.end(stdout);
                     } else {
-                        res.render('exec', {title: "nCService Backend", reload: reload, data: config.progs.list[id], arg: arg, stdout: stdout});
+                        res.render('exec', {title: "nCService Backend", reload: reload, data: config.progs.list[id], arg: arg, stdout: stdout, stderr: error});
                     }
                 }
             });
             if (async === "true") {
                 if (text !== "true") {
-                    res.render('exec', {title: "nCService Backend", reload: reload, data: config.progs.list[id], arg: arg, stdout: "Command " + config.progs.list[id].Name});
+                    res.render('exec', {title: "nCService Backend", reload: reload, data: config.progs.list[id], arg: arg, stdout: "Command " + config.progs.list[id].Name, stderr: ""});
                 }
             }
         } else {
