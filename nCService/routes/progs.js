@@ -12,13 +12,13 @@ exports.list = function(req, res) {
                 if (err)
                     console.log("Error Selecting : %s ", err);
 
-                res.render('list', {title: "nCService Backend", data: rows});
+                res.render('list', {title: "nCService Backend", reload: "", data: rows});
             });
         });
     } else if (config.progs.enable === 'true') {
-        res.render('list', {title: "nCService Backend", data: config.progs.list});
+        res.render('list', {title: "nCService Backend", reload: "", data: config.progs.list});
     } else {
-        res.render('error', {title: "nCService Backend Error!!", error: "In config file: config.mysql or config.progs should be enable"});
+        res.render('error', {title: "nCService Backend Error!!", reload: "", error: "In config file: config.mysql or config.progs should be enable"});
     }
 };
 
@@ -34,13 +34,13 @@ exports.get = function(req, res) {
                 if (err)
                     console.log("Error Selecting : %s ", err);
 
-                res.render('prog', {title: "nCService Backend", data: rows[0]});
+                res.render('prog', {title: "nCService Backend", reload: "", data: rows[0]});
             });
         });
     } else if (config.progs.enable === 'true') {
-        res.render('prog', {title: "nCService Backend", data: config.progs.list[id]});
+        res.render('prog', {title: "nCService Backend", reload: "", data: config.progs.list[id]});
     } else {
-        res.render('error', {title: "nCService Backend Error!!", error: "In config file: config.mysql or config.progs should be enable"});
+        res.render('error', {title: "nCService Backend Error!!", reload: "", error: "In config file: config.mysql or config.progs should be enable"});
     }
 };
 
@@ -54,6 +54,13 @@ exports.exec = function(req, res) {
     var arg = req.param("arg");
     var async = req.param("async");
     var text = req.param("text");
+    var reload = req.param("rel");
+
+    if (reload !== "" || reload !== "0") {
+        reload = "<META HTTP-EQUIV=\"refresh\" CONTENT=\"" + reload + "\">";
+    } else {
+        reload = "";
+    }
 
     if (id && arg) {
         if (config.mysql.enable === 'true') {
@@ -71,13 +78,13 @@ exports.exec = function(req, res) {
                             if (text === "true") {
                                 res.end(stdout);
                             } else {
-                                res.render('exec', {title: "nCService Backend", data: rows[0], arg: arg, stdout: stdout});
+                                res.render('exec', {title: "nCService Backend", reload: reload, data: rows[0], arg: arg, stdout: stdout});
                             }
                         }
                     });
                     if (async === "true") {
                         if (text !== "true") {
-                            res.render('exec', {title: "nCService Backend", data: rows[0], arg: arg, stdout: "Command " + rows[0].Name});
+                            res.render('exec', {title: "nCService Backend", reload: reload, data: rows[0], arg: arg, stdout: "Command " + rows[0].Name});
                         }
                     }
                 });
@@ -92,19 +99,19 @@ exports.exec = function(req, res) {
                     if (text === "true") {
                         res.end(stdout);
                     } else {
-                        res.render('exec', {title: "nCService Backend", data: config.progs.list[id], arg: arg, stdout: stdout});
+                        res.render('exec', {title: "nCService Backend", reload: reload, data: config.progs.list[id], arg: arg, stdout: stdout});
                     }
                 }
             });
             if (async === "true") {
                 if (text !== "true") {
-                    res.render('exec', {title: "nCService Backend", data: config.progs.list[id], arg: arg, stdout: "Command " + config.progs.list[id].Name});
+                    res.render('exec', {title: "nCService Backend", reload: reload, data: config.progs.list[id], arg: arg, stdout: "Command " + config.progs.list[id].Name});
                 }
             }
         } else {
-            res.render('error', {title: "nCService Backend Error!!", error: "In config file: config.mysql or config.progs should be enable"});
+            res.render('error', {title: "nCService Backend Error!!", reload: reload, error: "In config file: config.mysql or config.progs should be enable"});
         }
     } else {
-        res.render('error', {title: "nCService Backend Error!!", error: "Pass by GET id and dir name (?id=1&arg=abrj)"});
+        res.render('error', {title: "nCService Backend Error!!", reload: reload, error: "Pass by GET id and dir name (?id=1&arg=abrj)"});
     }
 };
