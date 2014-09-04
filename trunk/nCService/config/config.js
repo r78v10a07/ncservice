@@ -94,17 +94,26 @@ config.progs.list[6].Script = 'gsutil';
 config.progs.list[6].Comment = 'Run gsutil command';
 
 /*
+ * echo
+ */
+config.progs.list[7] = {};
+config.progs.list[7].Id = 7;
+config.progs.list[7].Name = 'echo';
+config.progs.list[7].Script = 'echo';
+config.progs.list[7].Comment = 'Run echo command';
+
+/*
  * LOCAL SCRIPTS
  */
 
 /*
  * Script to execute from Google Cloud Storage
  */
-config.progs.list[7] = {};
-config.progs.list[7].Id = 7;
-config.progs.list[7].Name = 'runFromGCS';
-config.progs.list[7].Script = './scripts/runFromGCS.sh';
-config.progs.list[7].Comment = 'Run runFromGCS local script';
+config.progs.list[8] = {};
+config.progs.list[8].Id = 8;
+config.progs.list[8].Name = 'runFromGCS';
+config.progs.list[8].Script = './scripts/runFromGCS.sh';
+config.progs.list[8].Comment = 'Run runFromGCS local script';
 
 
 module.exports = config;
