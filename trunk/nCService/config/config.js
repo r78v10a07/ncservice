@@ -103,17 +103,26 @@ config.progs.list[7].Script = 'echo';
 config.progs.list[7].Comment = 'Run echo command';
 
 /*
+ * uptime
+ */
+config.progs.list[8] = {};
+config.progs.list[8].Id = 8;
+config.progs.list[8].Name = 'uptime';
+config.progs.list[8].Script = 'uptime';
+config.progs.list[8].Comment = 'Run uptime command';
+
+/*
  * LOCAL SCRIPTS
  */
 
 /*
  * Script to execute from Google Cloud Storage
  */
-config.progs.list[8] = {};
-config.progs.list[8].Id = 8;
-config.progs.list[8].Name = 'runFromGCS';
-config.progs.list[8].Script = './scripts/runFromGCS.sh';
-config.progs.list[8].Comment = 'Run runFromGCS local script';
+config.progs.list[9] = {};
+config.progs.list[9].Id = 9;
+config.progs.list[9].Name = 'runFromGCS';
+config.progs.list[9].Script = './scripts/runFromGCS.sh';
+config.progs.list[9].Comment = 'Run runFromGCS local script';
 
 
 module.exports = config;
