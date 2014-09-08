@@ -1,6 +1,6 @@
 
 var config = require('../config/config');
-var status = "0";
+var status = "FREE";
 
 /*
  * GET programs
