@@ -1,5 +1,6 @@
 
 var config = require('../config/config');
+var status = "0";
 
 /*
  * GET programs
@@ -83,7 +84,7 @@ exports.exec = function(req, res) {
                         }
                     });
                     if (async === "true") {
-                        if (text !== "true") {                            
+                        if (text !== "true") {
                             res.render('exec', {title: "nCService Backend", reload: reload, data: rows[0], arg: arg, stdout: "Command " + rows[0].Name, stderr: ""});
                         }
                     }
@@ -114,4 +115,16 @@ exports.exec = function(req, res) {
     } else {
         res.render('error', {title: "nCService Backend Error!!", reload: reload, error: "Pass by GET id and dir name (?id=1&arg=abrj)"});
     }
+};
+
+/*
+ * Get and set the server status
+ */
+exports.status = function(req, res) {
+    var id = req.params.id;
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    if (id){
+        status = id;
+    }
+    res.end(status);
 };

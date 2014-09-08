@@ -50,6 +50,8 @@ if (config.mysql.enable === 'true') {
 app.get('/', progs.list);
 app.get('/prog/:id', progs.get);
 app.get('/exec', progs.exec);
+app.get('/status', progs.status);
+app.get('/status/:id', progs.status);
 
 http.createServer(app).listen(app.get('port'), function() {
     console.log('Express nCService server listening on port ' + app.get('port'));
