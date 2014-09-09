@@ -172,5 +172,5 @@ fi
 
 cd $l
 rm -rfv $d
-
+wget -qO- "http://localhost:8081/status/FREE"
 exit 0
