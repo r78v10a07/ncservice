@@ -16,10 +16,7 @@ OPTIONS:
    -z      Compress the result using gzip
    -l      Local tmp directory in the GCE VM. By default /localdata   
 EOF
-wget -qO- "http://localhost:8081/status/FREE"
 }
-
-wget -qO- "http://localhost:8081/status/BUSY"
 
 b=""
 d=""
@@ -67,7 +64,6 @@ if [ ! -d "$l" ]
 then
     echo "ERROR!!!"
     echo "The local directory $l doesn't exist"
-    wget -qO- "http://localhost:8081/status/FREE"
     exit 1
 fi
 
@@ -76,7 +72,6 @@ cd "$l"
 if [ $? -ne 0 ]
 then
     echo "ERROR changing to directory $l"
-    wget -qO- "http://localhost:8081/status/FREE"
     exit 1
 fi
 
@@ -86,7 +81,6 @@ then
     if [ $? -ne 0 ]
     then
         echo "ERROR removing directory $d"
-        wget -qO- "http://localhost:8081/status/FREE"
         exit 1
     fi
 fi
@@ -97,7 +91,6 @@ if [ $? -ne 0 ]
 then
     echo "ERROR!!!"
     echo "Can't copy from GCS bucket gs://$b/$d/"
-    wget -qO- "http://localhost:8081/status/FREE"
     exit 1 
 fi
 
@@ -106,7 +99,6 @@ if [ $? -ne 0 ]
 then
     echo "ERROR!!!"
     echo "Can't change to directory $d"
-    wget -qO- "http://localhost:8081/status/FREE"
     exit 1 
 fi
 
@@ -124,7 +116,6 @@ if [ ! -e "$s" ]
 then
     echo "ERROR!!!" >> status
     echo "The script $s doesn't exist on GCS bucket $b" >> status
-    wget -qO- "http://localhost:8081/status/FREE"
     exit 1
 fi
 
@@ -134,7 +125,6 @@ if [ $? -ne 0 ]
 then
     echo "ERROR!!!" >> status 2>&1
     echo "Can't change the premissions to $s" >> status
-    wget -qO- "http://localhost:8081/status/FREE"
     exit 1 
 fi
 
@@ -144,7 +134,6 @@ if [ $? -ne 0 ]
 then
     echo "ERROR!!!" >> status
     echo "Error running the script $s" >> status
-    wget -qO- "http://localhost:8081/status/FREE"
     exit 1 
 fi
 
@@ -156,7 +145,6 @@ do
     then
         echo "ERROR!!!" >> status
         echo "Error removing file $line" >> status
-        wget -qO- "http://localhost:8081/status/FREE"
         exit 1 
     fi
 done
@@ -169,7 +157,6 @@ then
     then
         echo "ERROR!!!" >> status
         echo "Error compressing the files" >> status
-        wget -qO- "http://localhost:8081/status/FREE"
         exit 1 
     fi 
 fi
@@ -180,13 +167,10 @@ if [ $? -ne 0 ]
 then
     echo "ERROR!!!"
     echo "Error copying the files to GCS bucket $b/$d"
-    wget -qO- "http://localhost:8081/status/FREE"
     exit 1
 fi
 
 cd $l
 rm -rfv $d
 
-
-wget -qO- "http://localhost:8081/status/FREE"
 exit 0
