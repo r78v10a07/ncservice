@@ -64,7 +64,6 @@ exports.exec = function(req, res) {
     }
 
     if (id && arg) {
-        status = "BUSY";
         if (config.mysql.enable === 'true') {
             req.getConnection(function(err, connection) {
                 var query = connection.query('SELECT * FROM Progs WHERE Id = ?', id, function(err, rows) {
@@ -82,11 +81,9 @@ exports.exec = function(req, res) {
                             } else {                                
                                 res.render('exec', {title: "nCService Backend", reload: reload, data: rows[0], arg: arg, stdout: stdout, stderr: error});
                             }
-                            status = "FREE";
                         }
                     });
                     if (async === "true") {
-                        status = "BUSY";
                         if (text !== "true") {
                             res.render('exec', {title: "nCService Backend", reload: reload, data: rows[0], arg: arg, stdout: "Command " + rows[0].Name, stderr: ""});
                         }                        
@@ -105,21 +102,17 @@ exports.exec = function(req, res) {
                     } else {                        
                         res.render('exec', {title: "nCService Backend", reload: reload, data: config.progs.list[id], arg: arg, stdout: stdout, stderr: error});
                     }
-                    status = "FREE";
                 }
             });
             if (async === "true") {
-                status = "BUSY";
                 if (text !== "true") {
                     res.render('exec', {title: "nCService Backend", reload: reload, data: config.progs.list[id], arg: arg, stdout: "Command " + config.progs.list[id].Name, stderr: ""});
                 }                
             }
         } else {
-            status = "FREE";
             res.render('error', {title: "nCService Backend Error!!", reload: reload, error: "In config file: config.mysql or config.progs should be enable"});
         }
     } else {
-        status = "FREE";
         res.render('error', {title: "nCService Backend Error!!", reload: reload, error: "Pass by GET id and dir name (?id=1&arg=abrj)"});
     }
 };
