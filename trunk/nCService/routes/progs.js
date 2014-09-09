@@ -78,18 +78,18 @@ exports.exec = function(req, res) {
                     var child = exec(rows[0].Script + " " + arg, function(error, stdout, stderr) {
                         if (async !== "true") {
                             if (text === "true") {
-                                status = "FREE";
                                 res.end(stdout);
-                            } else {
-                                status = "FREE";
+                            } else {                                
                                 res.render('exec', {title: "nCService Backend", reload: reload, data: rows[0], arg: arg, stdout: stdout, stderr: error});
                             }
+                            status = "FREE";
                         }
                     });
                     if (async === "true") {
+                        status = "BUSY";
                         if (text !== "true") {
                             res.render('exec', {title: "nCService Backend", reload: reload, data: rows[0], arg: arg, stdout: "Command " + rows[0].Name, stderr: ""});
-                        }
+                        }                        
                     }
                 });
             });
@@ -99,20 +99,20 @@ exports.exec = function(req, res) {
             }
 
             var child = exec(config.progs.list[id].Script + " " + arg, function(error, stdout, stderr) {
-                if (async !== "true") {
+                if (async !== "true") {                    
                     if (text === "true") {
-                        status = "FREE";
                         res.end(stdout);
-                    } else {
-                        status = "FREE";
+                    } else {                        
                         res.render('exec', {title: "nCService Backend", reload: reload, data: config.progs.list[id], arg: arg, stdout: stdout, stderr: error});
                     }
+                    status = "FREE";
                 }
             });
             if (async === "true") {
+                status = "BUSY";
                 if (text !== "true") {
                     res.render('exec', {title: "nCService Backend", reload: reload, data: config.progs.list[id], arg: arg, stdout: "Command " + config.progs.list[id].Name, stderr: ""});
-                }
+                }                
             }
         } else {
             status = "FREE";
