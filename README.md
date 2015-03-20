@@ -67,7 +67,6 @@ permissions. Also, the application should be executed in a protected port.
 Getting the source code, and download the NodeJS dependencies:
 
 ```
-#> svn checkout http://ncservice.googlecode.com/svn/trunk/nCService
 #> cd  nCService
 #> npm install
 ```
