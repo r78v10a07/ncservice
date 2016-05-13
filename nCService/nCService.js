@@ -48,6 +48,7 @@ if (config.mysql.enable === 'true') {
 }
 
 app.get('/', progs.list);
+app.get('/index', progs.list);
 app.get('/prog/:id', progs.get);
 app.get('/exec', progs.exec);
 app.get('/status', progs.status);

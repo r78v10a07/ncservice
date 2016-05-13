@@ -50,7 +50,7 @@ exports.get = function(req, res) {
  */
 
 exports.exec = function(req, res) {
-    var exec = require('exec');
+    var exec = require('child_process').exec;
     var id = req.param("id");
     var arg = req.param("arg");
     var async = req.param("async");

@@ -33,7 +33,6 @@ h6 {
 }
 h1 {
     font-size: 1.357em;
-//    color: #000;
 }
 h2 {
     font-size: 1.143em;
@@ -116,8 +115,7 @@ pre {
     background: no-repeat 100% 0; 
 }
 
-#main-title hgroup { 
-    // background: url(../images/logo.png) no-repeat 4px 10px; 
+#main-title hgroup {
 }
 
 #main-title hgroup { 
